@@ -1,0 +1,1 @@
+export TF_ADMIN_PASSWORD=$(openssl rand -base64 16)
