@@ -21,6 +21,13 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Gerar senha aleatória
+        id: senha
+        run: |
+          export TF_ADMIN_PASSWORD=$(openssl rand -base64 16)
+          echo "admin_password=\"$TF_ADMIN_PASSWORD\"" > terraform.auto.tfvars
+          echo "::set-output name=senha::$TF_ADMIN_PASSWORD"
+
       - name: Terraform Init
         run: terraform init
 
@@ -30,3 +37,8 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve tfplan
+
+      - name: Exibir comando SSH e senha
+        run: |
+          terraform output ssh_command
+          echo "Senha gerada para azureuser: ${{ steps.senha.outputs.senha }}"
