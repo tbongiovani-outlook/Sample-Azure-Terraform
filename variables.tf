@@ -15,3 +15,10 @@ variable "vm_name" {
   type        = string
   default     = "redhat-vm-001"
 }
+
+variable "admin_password" {
+  description = "Senha do usuário admin da VM (gerada no pipeline)"
+  type        = string
+  default     = ""
+}
+

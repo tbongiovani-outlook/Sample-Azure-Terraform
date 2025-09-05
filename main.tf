@@ -73,10 +73,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   size                = "Standard_B1s"
   admin_username      = "azureuser"
   network_interface_ids = [azurerm_network_interface.nic.id]
-  admin_ssh_key {
-    username   = "azureuser"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
+  admin_password      = var.admin_password
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
@@ -93,4 +90,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
 output "ssh_command" {
   description = "Comando para conectar via SSH na VM criada"
   value       = "ssh azureuser@${azurerm_public_ip.public_ip.ip_address}"
+}
+
+output "admin_password" {
+  description = "Senha gerada para o usuário azureuser"
+  value       = var.admin_password
 }
