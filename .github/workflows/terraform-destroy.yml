@@ -18,6 +18,12 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Gerar senha aleatória
+        id: senha
+        run: |
+          export TF_ADMIN_PASSWORD=$(openssl rand -base64 16)
+          echo "admin_password=\"$TF_ADMIN_PASSWORD\"" > terraform.auto.tfvars
+
       - name: Terraform Init
         run: terraform init
 
