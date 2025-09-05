@@ -14,4 +14,4 @@ if ($rgExists -eq "true") {
 }
 
 Write-Host "Executando terraform destroy..."
-terraform destroy -auto-approve -force
+terraform destroy -auto-approve
