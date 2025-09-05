@@ -1,13 +1,11 @@
 name: Terraform Azure Deploy
 
+
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  terraform:
+  terraform-apply:
     runs-on: ubuntu-latest
     env:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
